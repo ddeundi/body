@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BODY TYPE — 네 몸 속 히어로는?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#01472e; --sage:#ccd5ae; --olive:#e9edc9; --cream:#fefae0; --moss:#a3b18a;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --shadow:0 30px 60px -20px rgba(1,71,46,.28);
+    --accent:#ccd5ae;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter","Apple SD Gothic Neo",system-ui,sans-serif;color:var(--forest);
+    background:
+      radial-gradient(1200px 700px at 80% -5%, var(--olive), transparent 55%),
+      radial-gradient(900px 600px at -5% 100%, var(--moss), transparent 50%),
+      var(--cream);
+    min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased;padding:104px 20px 60px;
+  }
+  .disp{font-family:"Anton","Black Han Sans",sans-serif;font-weight:400;letter-spacing:-.03em;line-height:.82}
+  .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3em;color:var(--forest);opacity:.65}
+
+  .noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 28px}
+  .logo{font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:15px}
+  .navpill{display:flex;gap:20px;padding:11px 22px;border-radius:40px;background:#ffffff2e;
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid #ffffff55}
+  .navpill a{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--forest);text-decoration:none;opacity:.7;cursor:pointer}
+  .badge{background:#fff;border-radius:30px;padding:7px 15px;font-size:11px;font-weight:700;letter-spacing:.1em;box-shadow:var(--shadow)}
+  @media(max-width:560px){.navpill{display:none}}
+
+  .app{width:100%;max-width:620px;margin:0 auto;position:relative}
+  .screen{display:none} .screen.on{display:block}
+
+  .reveal{opacity:1;transform:none}
+  .reveal.in{animation:revealUp 1.1s var(--ease)}
+  @keyframes revealUp{from{opacity:0;transform:translateY(90px)}to{opacity:1;transform:none}}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(4deg)}}
+  @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-26px) rotate(-5deg)}}
+
+  .block-card{border-radius:2.5rem;padding:46px 38px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .sage{background:var(--sage)} .olive{background:var(--olive)} .forest{background:var(--forest);color:var(--cream)}
+
+  /* HERO */
+  .hero{text-align:center;border-radius:5rem;position:relative}
+  .hero .label{margin-bottom:18px;display:block}
+  .hero h1{font-size:clamp(54px,16vw,140px);margin:6px 0 4px}
+  .hero h1 .ln{display:block}
+  .hero h1 .let{display:inline-block}
+  .hero.in h1 .let{animation:letUp .9s var(--ease) both}
+  @keyframes letUp{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+  .hero .sub{max-width:450px;margin:24px auto 0;font-size:15px;opacity:.85}
+  .gallery{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:26px}
+  .gchip{width:92px;text-align:center}
+  .gav{width:92px;height:112px;border-radius:1.6rem;background:var(--cream);box-shadow:var(--shadow);overflow:hidden}
+  .gchip span{display:block;margin-top:8px;font-size:11px;font-weight:700}
+  @media(max-width:560px){.gchip{width:60px}.gav{width:60px;height:76px}.gchip span{font-size:9px}}
+  .floaty{position:absolute;width:80px;height:104px;border-radius:2rem;overflow:hidden;background:var(--cream);box-shadow:var(--shadow);z-index:2}
+  .floaty svg{width:100%;height:100%}
+  .f1{top:1%;left:-3%;animation:float 7s var(--ease) infinite}
+  .f2{top:8%;right:-4%;animation:floatB 8s var(--ease) infinite}
+  @media(max-width:560px){.f1,.f2{display:none}}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
+    font-family:"Inter",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:13px;
+    border:none;background:var(--forest);color:var(--cream);padding:20px 40px;border-radius:40px;box-shadow:var(--shadow);transition:transform .5s var(--ease)}
+  .btn:hover{transform:translateY(-4px)}
+  .btn.alt{background:var(--cream);color:var(--forest)}
+  .btn.ghost{background:transparent;color:var(--forest);box-shadow:none;border:1.5px solid var(--forest)}
+  .btn.block{display:flex;width:100%;margin-top:32px}
+
+  /* PROFILE */
+  .ptitle{font-size:clamp(34px,8vw,60px);margin-bottom:6px}
+  .psub{font-size:14px;opacity:.8;margin-bottom:30px}
+  .field{margin-bottom:22px}
+  .field>.label{display:block;margin-bottom:11px}
+  .row2{display:flex;gap:14px} .row2 .field{flex:1}
+  .seg{display:flex;gap:12px}
+  .seg button{flex:1;padding:18px;border-radius:1.5rem;border:1.5px solid transparent;background:var(--cream);
+    font-family:inherit;font-weight:700;font-size:16px;color:var(--forest);cursor:pointer;
+    box-shadow:0 12px 24px -16px rgba(1,71,46,.4);transition:all .35s var(--ease)}
+  .seg button.on{background:var(--forest);color:var(--cream);transform:translateY(-2px)}
+  .inp{display:flex;align-items:center;gap:8px;background:var(--cream);border-radius:1.5rem;padding:15px 18px;box-shadow:0 12px 24px -16px rgba(1,71,46,.4)}
+  .inp input{flex:1;border:none;background:none;font-family:inherit;font-size:21px;font-weight:700;color:var(--forest);outline:none;width:100%}
+  .inp input::placeholder{color:var(--forest);opacity:.3}
+  .inp .u{font-weight:700;opacity:.45;font-size:13px}
+  .skip{text-align:center;margin-top:14px;font-size:12px;opacity:.55}
+
+  /* QUIZ */
+  .qhead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
+  .qnum{font-size:clamp(52px,14vw,100px)} .qnum small{font-size:.28em;opacity:.4}
+  .bar{height:8px;background:#ffffff7a;border-radius:10px;overflow:hidden;margin-bottom:28px}
+  .bar>i{display:block;height:100%;width:0;border-radius:10px;background:var(--forest);transition:width .6s var(--ease)}
+  .qtext{font-size:clamp(21px,4.2vw,29px);font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:24px}
+  .opt{display:flex;align-items:center;gap:16px;width:100%;text-align:left;cursor:pointer;background:var(--cream);
+    border:1.5px solid transparent;color:var(--forest);font-family:inherit;padding:17px 18px;border-radius:1.6rem;
+    margin-bottom:12px;box-shadow:0 12px 24px -16px rgba(1,71,46,.4);transition:transform .45s var(--ease),border-color .3s,background .3s}
+  .opt:hover{transform:translateX(8px);border-color:var(--forest);background:#fff}
+  .opt .ico{font-family:"Anton",sans-serif;font-size:20px;width:48px;height:48px;flex:none;border-radius:1.1rem;background:var(--olive);display:grid;place-items:center;color:var(--forest)}
+  .opt .tx{font-size:15.5px;font-weight:500;line-height:1.4}
+  .back{cursor:pointer;background:none;border:none;font-family:inherit;font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--forest);opacity:.6;padding:6px}
+
+  /* RESULT */
+  .r-avatar{width:155px;height:200px;margin:0 auto;display:block;animation:float 7s var(--ease) infinite;filter:drop-shadow(0 18px 28px rgba(0,0,0,.3))}
+  .r-kicker{text-align:center;margin-top:14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.34em;color:var(--accent)}
+  .r-name{text-align:center;font-size:clamp(44px,11vw,86px);margin-top:6px;color:var(--cream)}
+  .r-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px}
+  .r-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--forest);background:var(--accent);padding:7px 14px;border-radius:30px}
+  .r-block{background:#ffffff14;border:1px solid #ffffff1f;border-radius:1.8rem;padding:22px 24px;margin-top:16px}
+  .r-block h4{font-size:11px;text-transform:uppercase;letter-spacing:.24em;color:var(--accent);margin-bottom:10px}
+  .r-block p{font-size:15px;color:var(--sage);line-height:1.65}
+  .plan div{padding:11px 0;border-bottom:1px solid #ffffff14} .plan div:last-child{border-bottom:none}
+  .plan .label{display:block;color:var(--accent);opacity:.9;margin-bottom:3px}
+  .plan p{color:var(--sage);font-size:14.5px} .plan p .dim{opacity:.55;font-weight:400}
+
+  /* SCORE CHART */
+  .score{margin:12px 0}
+  .score.win{background:#ffffff12;border-radius:1.2rem;padding:12px 14px;margin:10px -6px}
+  .score .sline{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+  .score .sn{display:flex;align-items:center;font-size:13.5px;color:var(--sage);font-weight:500}
+  .score .rank{font-style:normal;display:inline-grid;place-items:center;width:21px;height:21px;border-radius:7px;background:#ffffff22;font-size:11px;font-weight:700;color:var(--cream);margin-right:8px}
+  .score .sv{font-size:13px;color:var(--cream);font-weight:700;opacity:.8}
+  .score .st{height:15px;background:#ffffff14;border-radius:8px;overflow:hidden}
+  .score .sf{height:100%;width:0;border-radius:8px;transition:width 1s var(--ease)}
+  .score.win .sn{color:var(--cream);font-weight:700}
+  .score.win .rank{background:var(--accent);color:var(--forest)}
+  .score.win .sv{opacity:1;font-size:14.5px;color:var(--accent)}
+  .score.win .sf{box-shadow:0 0 16px -2px var(--accent)}
+
+  /* WORKOUT MATE */
+  .mate{display:flex;gap:12px}
+  .matec{flex:1;background:#ffffff10;border:1px solid #ffffff1a;border-radius:1.4rem;padding:16px 12px;text-align:center}
+  .matec .mav{width:56px;height:72px;margin:0 auto 9px;border-radius:1rem;overflow:hidden;background:var(--cream)}
+  .matec .mt{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+  .matec.good .mt{color:#9be7b0}
+  .matec.bad .mt{color:#f0a79e}
+  .matec .mn{font-size:14.5px;font-weight:700;color:var(--cream);margin-bottom:5px}
+  .matec .mr{font-size:12px;color:var(--sage);line-height:1.5}
+
+  .r-actions{display:flex;gap:12px;margin-top:30px}
+  .r-actions .btn{flex:1;padding:18px 18px}
+  .r-actions .btn.ghost{border-color:var(--accent);color:var(--accent)}
+
+  footer{text-align:center;margin:46px auto 0;max-width:620px}
+  footer .label{opacity:.4;font-size:10px}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<nav>
+  <div class="logo">— BODYTYPE</div>
+  <div class="navpill"><a id="navTest">TEST</a><a id="navRestart">RESTART</a><a>ABOUT</a></div>
+  <div class="badge">5 / FOREST EDITION</div>
+</nav>
+
+<div class="app">
+
+  <!-- 인트로 -->
+  <section class="screen on" id="intro">
+    <div class="block-card sage hero reveal" id="hero">
+      <div class="floaty f1" id="fl1"></div>
+      <div class="floaty f2" id="fl2"></div>
+      <span class="label">BODY CHARACTER TEST · 2026</span>
+      <h1 class="disp" id="heroTitle"><span class="ln">네 몸 속</span><span class="ln">히어로는?</span></h1>
+      <p class="sub">운동 취향만 답하면 5초 만에 밝혀지는 나의 ‘몸 캐릭터’.
+        성별·키·체중에 맞춘 <b>운동·식단·칼로리 처방</b>까지 한 번에.</p>
+      <div class="gallery" id="gallery"></div>
+      <button class="btn block" id="startBtn">내 캐릭터 찾기 →</button>
+    </div>
+  </section>
+
+  <!-- 프로필 -->
+  <section class="screen" id="profile">
+    <div class="block-card olive reveal" id="profileCard">
+      <h2 class="ptitle disp">먼저, 당신은?</h2>
+      <p class="psub">성별·키·몸무게를 알려주면 결과 처방(운동·단백질·칼로리)을 정확히 맞춰드려요.</p>
+      <div class="field">
+        <span class="label">성별 / Gender</span>
+        <div class="seg"><button id="gM">남성</button><button id="gF">여성</button></div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <span class="label">키 / Height</span>
+          <div class="inp"><input id="hInput" type="number" inputmode="decimal" placeholder="170" min="120" max="220"><span class="u">CM</span></div>
+        </div>
+        <div class="field">
+          <span class="label">몸무게 / Weight</span>
+          <div class="inp"><input id="wInput" type="number" inputmode="decimal" placeholder="65" min="20" max="200"><span class="u">KG</span></div>
+        </div>
+      </div>
+      <button class="btn block" id="beginBtn">테스트 시작 →</button>
+      <p class="skip">입력 없이 시작해도 돼요 — 처방은 일반 기준으로 안내됩니다.</p>
+    </div>
+  </section>
+
+  <!-- 질문 -->
+  <section class="screen" id="quiz">
+    <div class="block-card olive reveal" id="quizCard">
+      <div class="qhead">
+        <div class="qnum disp"><span id="qnow">01</span><small> / 05</small></div>
+        <button class="back" id="backBtn">← 이전</button>
+      </div>
+      <div class="bar"><i id="barfill"></i></div>
+      <div class="qtext" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- 결과 -->
+  <section class="screen" id="result">
+    <div class="block-card forest reveal" id="resultCard">
+      <div class="r-avatar" id="rAvatar"></div>
+      <div class="r-kicker" id="rKicker"></div>
+      <div class="r-name disp" id="rName"></div>
+      <div class="r-tags" id="rTags"></div>
+      <div class="r-block"><h4>Why this character / 왜 이 캐릭터일까</h4><p id="rReason"></p></div>
+      <div class="r-block"><h4>One line / 한 줄 설명</h4><p id="rDesc"></p></div>
+      <div class="r-block"><h4>Personalized / 너만을 위한 처방</h4><div class="plan" id="rPlan"></div></div>
+      <div class="r-block"><h4>Workout mate / 운동 메이트 궁합</h4><div class="mate" id="rMate"></div></div>
+      <div class="r-block"><h4>Your scores / 나의 성향 점수</h4><div id="rScores"></div></div>
+      <div class="r-actions">
+        <button class="btn ghost" id="againBtn">다시하기</button>
+        <button class="btn alt" id="shareBtn">친구에게 추천 🔗</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer><span class="label">— Earthy editorial · Forest &amp; Sage · Made with Claude Code</span></footer>
+
+<script>
+/* ===== SVG 캐릭터 아바타 (전신 실루엣 + 상징) ===== */
+const SIL={
+  cap:{hR:14,sw:30,ww:15,hw:18,aw:9,legW:12,legBot:206,fig:"#01472e",bg:"#ccd5ae",sym:"🛡️",line:true},
+  hulk:{hR:15,sw:43,ww:26,hw:28,aw:17,legW:20,legBot:200,fig:"#244b30",bg:"#a3b18a",sym:"💪",line:true},
+  bruce:{hR:13,sw:26,ww:12,hw:15,aw:7,legW:10,legBot:208,fig:"#3a2f0c",bg:"#e9c46a",sym:"🐉",line:true},
+  barbie:{hR:13,sw:19,ww:9,hw:20,aw:5,legW:7,legBot:222,fig:"#9c5a72",bg:"#e8b4c8",sym:"🎀",line:false},
+  pooh:{hR:15,sw:24,ww:30,hw:28,aw:11,legW:16,legBot:196,fig:"#8a5a12",bg:"#e9b949",sym:"🍯",line:false}
+};
+function avatar(key,sym){
+  const p=SIL[key],cx=60,shoulderY=46,waistY=104,hipY=126;
+  const legGapX=p.hw*0.5, legH=p.legBot-hipY+2;
+  const legL=`<rect x="${cx-legGapX-p.legW/2}" y="${hipY-2}" width="${p.legW}" height="${legH}" rx="${p.legW/2}" fill="${p.fig}"/>`;
+  const legR=`<rect x="${cx+legGapX-p.legW/2}" y="${hipY-2}" width="${p.legW}" height="${legH}" rx="${p.legW/2}" fill="${p.fig}"/>`;
+  const armL=`<rect x="${cx-p.sw-p.aw/2}" y="${shoulderY+2}" width="${p.aw}" height="${waistY-shoulderY+10}" rx="${p.aw/2}" fill="${p.fig}"/>`;
+  const armR=`<rect x="${cx+p.sw-p.aw/2}" y="${shoulderY+2}" width="${p.aw}" height="${waistY-shoulderY+10}" rx="${p.aw/2}" fill="${p.fig}"/>`;
+  const torso=`<path d="M ${cx-p.sw} ${shoulderY} Q ${cx-p.sw} ${shoulderY-7} 60 ${shoulderY-9} Q ${cx+p.sw} ${shoulderY-7} ${cx+p.sw} ${shoulderY} L ${cx+p.ww} ${waistY} L ${cx+p.hw} ${hipY} L ${cx-p.hw} ${hipY} L ${cx-p.ww} ${waistY} Z" fill="${p.fig}"/>`;
+  const def=p.line?`<line x1="60" y1="${shoulderY+11}" x2="60" y2="${waistY-2}" stroke="${p.bg}" stroke-width="2.6" opacity="0.36"/><line x1="${cx-p.ww*0.7}" y1="78" x2="${cx+p.ww*0.7}" y2="78" stroke="${p.bg}" stroke-width="2.2" opacity="0.3"/>`:"";
+  const neck=`<rect x="54" y="36" width="12" height="13" fill="${p.fig}"/>`;
+  const head=`<circle cx="60" cy="26" r="${p.hR}" fill="${p.fig}"/>`;
+  const badge=sym?`<circle cx="101" cy="150" r="16" fill="#fefae0"/><text x="101" y="156" font-size="18" text-anchor="middle">${p.sym}</text>`:"";
+  return `<svg viewBox="0 0 120 232" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="120" rx="54" ry="108" fill="${p.bg}" opacity="0.42"/>${legL}${legR}${armL}${armR}${torso}${def}${neck}${head}${badge}</svg>`;
+}
+
+/* ===== 결과 캐릭터 ===== */
+const CHARS={
+  cap:{kicker:"THE GOLDEN ALL-ROUNDER",name:"캡틴 아메리카",accent:"#ccd5ae",tags:["슬림탄탄","황금비율","올라운더"],
+    reason:"당신은 ‘너무 크지도, 마르지도 않은’ 완벽한 균형을 원해요. 웨이트와 유산소를 골고루, 꾸준한 루틴을 좋아하는 답변이 가득했죠. 어느 한쪽으로도 치우치지 않는 이상적인 비율 — 그야말로 슈퍼솔저의 실루엣입니다.",
+    desc:"넓은 어깨에 잘록한 허리, 어디 내놔도 멋진 ‘교과서 몸’. MZ가 가장 선호한다는 lean-muscular 체형의 정석이에요."},
+  hulk:{kicker:"THE POWER BEAST",name:"헐크",accent:"#a3b18a",tags:["압도적 벌크","최대 근육량","파워"],
+    reason:"당신의 선택은 처음부터 끝까지 ‘일단 크고 강하게’! 무거운 중량, 빡센 빈도, 든든하게 먹는 벌크업까지 — 사이즈와 힘 그 자체가 목표인 타입이에요. 가장 거대하고 강력한 그 이름, 헐크가 딱입니다.",
+    desc:"존재감만으로 압도하는 매스 몬스터. 디테일보다 ‘크기와 파워’가 로망인 사람의 몸이죠."},
+  bruce:{kicker:"THE SHREDDED MACHINE",name:"이소룡",accent:"#e9c46a",tags:["초저체지방","선명한 잔근육","실전형"],
+    reason:"당신이 원하는 건 크기보다 ‘칼각’. 체지방을 쫙 덜어내 선명하게 갈라진 잔근육, 군더더기 없는 날렵함을 택했죠. 맨몸·고강도를 즐기는 당신은 전설의 무도가, 이소룡 타입입니다.",
+    desc:"불필요한 건 다 깎아낸 기능적인 몸. 무겁진 않아도 보는 순간 ‘운동 좀 하네’ 소리 나오는 실전형 피지컬."},
+  barbie:{kicker:"THE SLENDER LINE",name:"바비",accent:"#e8b4c8",tags:["롱 라인","늘씬·길쭉","우아한 비율"],
+    reason:"당신은 ‘크고 강한’보다 길고 늘씬한 라인을 꿈꿔요. 요가·필라테스로 유연성을 챙기고 가볍고 클린한 식단을 골랐죠. 군살 없이 곧게 뻗은 긴 실루엣과 또렷한 보디라인 — 전 세계가 아는 ‘비율의 아이콘’ 바비예요.",
+    desc:"근육 볼륨보다 길어 보이는 비율과 또렷한 라인이 핵심. 길고 곧은 다리, 잘록한 허리, 우아한 자세를 추구하는 타입이에요."},
+  pooh:{kicker:"THE HAPPY & HEALTHY",name:"곰돌이 푸",accent:"#e9b949",tags:["건강한 통통","스트레스 프리","있는 그대로"],
+    reason:"당신에게 몸은 ‘스트레스 받으며 만드는 것’이 아니에요. 무리한 운동·식단보다 건강하고 행복한 일상을 택했죠. 둥글둥글 편안하지만 누구보다 사랑받는, 그래서 더 멋진 곰돌이 푸가 딱이에요.",
+    desc:"꼭 식스팩이 아니어도 좋아요. 잘 걷고, 잘 먹고, 잘 웃는 건강한 몸 — 요즘 다시 주목받는 ‘바디 포지티브’의 주인공."}
+};
+
+/* 성별·키·체중 반영 처방 */
+const PLAN={
+  cap:{freq:"주 4~5회 (분할 웨이트 + 가벼운 유산소)",kcal:"유지 + 약간 잉여 (린매스업)",pf:1.8,adj:150,
+    ex:{남:"어깨·등으로 V라인, 코어로 허리 라인 정리",여:"어깨·등 라인 + 애플힙·코어 중심으로 비율 완성"}},
+  hulk:{freq:"주 5~6회 (고중량 복합운동)",kcal:"칼로리 잉여 (벌크업)",pf:2.0,adj:400,
+    ex:{남:"가슴·등·다리 스쿼트·데드·벤치 고중량 위주",여:"하체·등 고중량으로 볼륨업, 복합운동 중심"}},
+  bruce:{freq:"주 5회+ (웨이트 + 고강도 유산소)",kcal:"칼로리 적자 (커팅)",pf:2.0,adj:-400,
+    ex:{남:"웨이트 + 복싱·HIIT·맨몸 서킷으로 체지방 커팅",여:"하체·코어 서킷 + HIIT로 탄탄하게 커팅"}},
+  barbie:{freq:"주 3~4회 (필라테스·요가 + 가벼운 웨이트)",kcal:"유지~약간 적자, 클린·소식",pf:1.5,adj:-250,
+    ex:{남:"필라테스·요가 + 가벼운 전신 웨이트로 라인 정리",여:"필라테스·요가 + 하체·코어로 길고 잘록한 라인 강조"}},
+  pooh:{freq:"주 2~3회 (가볍게, 무리 없이)",kcal:"무리 없는 유지, 규칙적인 세 끼",pf:1.2,adj:0,
+    ex:{남:"산책·가벼운 홈트·스트레칭으로 활동량 유지",여:"산책·가벼운 홈트·스트레칭으로 활동량 유지"}}
+};
+
+/* 운동 메이트 궁합 (잘 맞는 / 안 맞는 캐릭터) */
+const MATE={
+  cap:{good:"barbie",goodR:"비율과 자세를 함께 챙기는 찰떡 짝꿍이에요.",bad:"pooh",badR:"운동 텐션 차이가 커서 페이스 맞추기가 힘들어요."},
+  hulk:{good:"bruce",goodR:"고강도에 진심인 동지! 서로 “한 세트 더”를 외쳐줘요.",bad:"barbie",badR:"벌크업 vs 슬림 라인, 목표가 정반대예요."},
+  bruce:{good:"hulk",goodR:"땀에 진심인 둘, 강도 높은 운동을 함께 불태워요.",bad:"pooh",badR:"쉴 틈 없는 당신과 여유로운 푸는 페이스가 안 맞아요."},
+  barbie:{good:"cap",goodR:"라인과 균형을 함께 잡는 우아한 파트너예요.",bad:"hulk",badR:"고중량 벌크와는 분위기도 목표도 정반대예요."},
+  pooh:{good:"cap",goodR:"꾸준한 캡틴이 푸의 활동량을 살살 끌어올려줘요.",bad:"bruce",badR:"쉴 틈 없는 고강도는 푸에겐 너무 빡세요."}
+};
+
+/* ===== 질문 (시나리오형) ===== */
+const QUESTIONS=[
+  {q:"거울 앞에 섰을 때, 가장 듣고 싶은 한마디는?",o:[
+    {t:"“와 비율 미쳤다, 옷빨 진짜 잘 받겠다”",k:"cap"},
+    {t:"“헐… 우락부락 장난 아니다, 크다 커”",k:"hulk"},
+    {t:"“데피니션 봐, 갈라진 거 실화냐”",k:"bruce"},
+    {t:"“다리 길고 라인 곱다, 모델 같아”",k:"barbie"},
+    {t:"“건강해 보인다, 보기 좋다 진짜”",k:"pooh"}]},
+  {q:"솔직히 말해봐, 일주일 운동 시간 너의 현실은?",o:[
+    {t:"주 4~5번은 루틴처럼 꼬박꼬박",k:"cap"},
+    {t:"주 5~6번, 헬스장이 곧 내 집",k:"hulk"},
+    {t:"주 5번+, 짧고 굵게 불태운다",k:"bruce"},
+    {t:"주 2~3번, 가볍게 몸 푸는 정도",k:"barbie"},
+    {t:"주 1~2번… 산책도 운동이지 뭐",k:"pooh"}]},
+  {q:"헬스장에 들어서면, 몸이 제일 먼저 향하는 곳은?",o:[
+    {t:"덤벨존이랑 러닝머신, 골고루 도장깨기",k:"cap"},
+    {t:"스쿼트랙 직행, 무거운 거부터 든다",k:"hulk"},
+    {t:"복싱백·케틀벨, 땀부터 쫙 뺀다",k:"bruce"},
+    {t:"매트존, 요가매트 깔고 스트레칭",k:"barbie"},
+    {t:"음… 일단 안마의자에 좀 앉을게",k:"pooh"}]},
+  {q:"냉장고 문을 활짝 열었다. 너의 손이 가는 건?",o:[
+    {t:"닭가슴살에 현미밥, 균형 있게 챙겨먹기",k:"cap"},
+    {t:"소고기·계란 잔뜩, 또 먹고 또 먹고",k:"hulk"},
+    {t:"샐러드+단백질, 칼로리는 계산 끝났다",k:"bruce"},
+    {t:"두부랑 채소, 가볍고 깔끔한 한 끼",k:"barbie"},
+    {t:"치킨이 보인다… 행복이 최고잖아?",k:"pooh"}]},
+  {q:"내가 갖고 싶은 몸을, 영화 포스터 문구로 만든다면?",o:[
+    {t:"“완벽한 밸런스, 황금비율의 귀환”",k:"cap"},
+    {t:"“지구를 들어올리는 압도적 파워”",k:"hulk"},
+    {t:"“1초의 망설임도 없는, 칼날 같은 몸”",k:"bruce"},
+    {t:"“바람처럼 길게, 물처럼 우아하게”",k:"barbie"},
+    {t:"“행복이 곧 건강, 있는 그대로 완벽”",k:"pooh"}]}
+];
+const WEIGHTS=[1,1,1,1,2];
+const TOTALW=WEIGHTS.reduce((a,b)=>a+b,0);
+
+let qi=0; const answers=[]; const profile={gender:null,weight:null,height:null};
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  $(id).classList.add("on");
+  const card=$(id).querySelector(".reveal");
+  if(card){card.classList.remove("in");requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add("in")));}
+}
+
+function buildIntro(){
+  const order=["cap","hulk","bruce","barbie","pooh"];
+  $("gallery").innerHTML=order.map(k=>`<div class="gchip"><div class="gav">${avatar(k,true)}</div><span>${CHARS[k].name}</span></div>`).join("");
+  $("fl1").innerHTML=avatar("hulk",true);
+  $("fl2").innerHTML=avatar("barbie",true);
+}
+function splitHero(){
+  $("heroTitle").querySelectorAll(".ln").forEach((ln,li)=>{
+    const txt=ln.textContent;ln.textContent="";
+    [...txt].forEach((ch,ci)=>{const s=document.createElement("span");s.className="let";s.textContent=ch===" "?" ":ch;
+      s.style.animationDelay=(0.25+(li*txt.length+ci)*0.05)+"s";ln.appendChild(s);});
+  });
+}
+try{buildIntro();splitHero();}catch(e){}
+requestAnimationFrame(()=>requestAnimationFrame(()=>$("hero").classList.add("in")));
+
+function goProfile(){showScreen("profile");}
+function setGender(g){profile.gender=g;$("gM").classList.toggle("on",g==="남");$("gF").classList.toggle("on",g==="여");}
+function beginQuiz(){
+  const w=parseFloat($("wInput").value),h=parseFloat($("hInput").value);
+  profile.weight=(w>0)?w:null; profile.height=(h>0)?h:null;
+  qi=0;answers.length=0;render();showScreen("quiz");
+}
+function back(){if(qi===0){showScreen("profile");return;}qi--;answers.pop();render();}
+
+function render(){
+  const Q=QUESTIONS[qi];
+  $("qnow").textContent=pad(qi+1);
+  $("barfill").style.width=(qi/QUESTIONS.length*100)+"%";
+  $("qtext").textContent=Q.q;
+  const box=$("opts");box.innerHTML="";
+  Q.o.forEach((op,idx)=>{
+    const b=document.createElement("button");b.className="opt";
+    b.innerHTML=`<span class="ico">${String.fromCharCode(65+idx)}</span><span class="tx">${op.t}</span>`;
+    b.addEventListener("click",()=>choose(op.k));box.appendChild(b);
+  });
+}
+function choose(key){answers[qi]=key;if(qi<QUESTIONS.length-1){qi++;render();}else finish();}
+
+function finish(){
+  const score={cap:0,hulk:0,bruce:0,barbie:0,pooh:0};
+  answers.forEach((k,idx)=>score[k]+=WEIGHTS[idx]);
+  let best=Object.keys(score).reduce((a,b)=>score[b]>score[a]?b:a,"cap");
+  const top=Math.max(...Object.values(score));
+  const tied=Object.keys(score).filter(k=>score[k]===top);
+  if(tied.length>1&&tied.includes(answers[4]))best=answers[4];
+  $("barfill").style.width="100%";
+  paint(best,score);
+  showScreen("result");
+}
+
+/* 미플린-세인트 지어 공식 (나이 25 가정) → 하루 칼로리 */
+function calcKcal(key,gender,w,h){
+  if(!w||!h) return null;
+  const age=25;
+  const bmr = (gender==="여") ? (10*w+6.25*h-5*age-161) : (10*w+6.25*h-5*age+5);
+  const tdee = bmr*1.5; // 보통 활동량
+  const target = tdee + PLAN[key].adj;
+  return {tdee:Math.round(tdee/50)*50, target:Math.round(target/50)*50};
+}
+
+function paint(key,score){
+  const c=CHARS[key],pl=PLAN[key];
+  document.documentElement.style.setProperty("--accent",c.accent);
+  $("rAvatar").innerHTML=avatar(key,true);
+  $("rKicker").textContent=c.kicker;
+  $("rName").textContent=c.name;
+  $("rTags").innerHTML=c.tags.map(t=>`<span class="r-tag">${t}</span>`).join("");
+  $("rReason").textContent=c.reason;
+  $("rDesc").textContent=c.desc;
+
+  const g=profile.gender||"남";
+  const proteinText=profile.weight
+    ? `약 ${Math.round(profile.weight*pl.pf)}g <span class="dim">(체중 ${profile.weight}kg × ${pl.pf}g)</span>`
+    : `체중 1kg당 약 ${pl.pf}g <span class="dim">(체중 입력 시 자동 계산)</span>`;
+  const kc=calcKcal(key,g,profile.weight,profile.height);
+  const kcalText=kc
+    ? `${pl.kcal} · 하루 약 <b>${kc.target}kcal</b> <span class="dim">(유지 ${kc.tdee}kcal 기준)</span>`
+    : `${pl.kcal} <span class="dim">(키·체중 입력 시 칼로리 자동 계산)</span>`;
+  const head=`성별 ${profile.gender?(profile.gender==="여"?"여성":"남성"):"미입력"} · 키 ${profile.height?profile.height+"cm":"미입력"} · 체중 ${profile.weight?profile.weight+"kg":"미입력"}`;
+  $("rPlan").innerHTML=`
+    <div><span class="label">기준</span><p class="dim">${head}</p></div>
+    <div><span class="label">추천 운동</span><p>${pl.ex[g]}</p></div>
+    <div><span class="label">주당 빈도</span><p>${pl.freq}</p></div>
+    <div><span class="label">식단 · 칼로리</span><p>${kcalText}</p></div>
+    <div><span class="label">하루 단백질 목표</span><p>${proteinText}</p></div>`;
+
+  const m=MATE[key];
+  $("rMate").innerHTML=`
+    <div class="matec good"><div class="mt">잘 맞아요 💚</div><div class="mav">${avatar(m.good,false)}</div><div class="mn">${CHARS[m.good].name}</div><div class="mr">${m.goodR}</div></div>
+    <div class="matec bad"><div class="mt">안 맞아요 💢</div><div class="mav">${avatar(m.bad,false)}</div><div class="mn">${CHARS[m.bad].name}</div><div class="mr">${m.badR}</div></div>`;
+
+  const rows=Object.keys(score).sort((a,b)=>score[b]-score[a]);
+  $("rScores").innerHTML=rows.map((k,i)=>
+    `<div class="score${k===key?' win':''}">
+       <div class="sline"><span class="sn"><i class="rank">${i+1}</i>${SIL[k].sym} ${CHARS[k].name}</span><span class="sv">${score[k]}점</span></div>
+       <div class="st"><span class="sf" data-w="${Math.round(score[k]/TOTALW*100)}" style="background:${SIL[k].bg}"></span></div>
+     </div>`).join("");
+  requestAnimationFrame(()=>$("rScores").querySelectorAll(".sf").forEach(f=>f.style.width=f.dataset.w+"%"));
+}
+
+function restart(){showScreen("intro");$("hero").classList.add("in");}
+
+/* 버튼 연결 (인라인 onclick은 일부 환경에서 차단되므로 JS로 연결) */
+function wire(){
+  $("startBtn").addEventListener("click",goProfile);
+  $("gM").addEventListener("click",()=>setGender("남"));
+  $("gF").addEventListener("click",()=>setGender("여"));
+  $("beginBtn").addEventListener("click",beginQuiz);
+  $("backBtn").addEventListener("click",back);
+  $("againBtn").addEventListener("click",restart);
+  $("shareBtn").addEventListener("click",restart);
+  $("navTest").addEventListener("click",restart);
+  $("navRestart").addEventListener("click",restart);
+}
+wire();
+</script>
+</body>
+</html>
