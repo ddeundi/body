@@ -3,118 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내가 원하는 몸은? · 캐릭터 바디 테스트</title>
+<title>BODY TYPE — 내가 원하는 몸은?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0d0f1c; --card:#171a30; --ink:#f4f6ff; --sub:#aab0d8; --mut:#6f76a8;
-    --line:#272b4d;
-    /* 결과에 따라 JS가 덮어쓰는 테마 변수 */
-    --acc:#7c5cff; --acc2:#5cc8ff; --glow:rgba(124,92,255,.45);
+    --forest:#01472e; --sage:#ccd5ae; --olive:#e9edc9; --cream:#fefae0; --moss:#a3b18a;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --shadow:0 30px 60px -20px rgba(1,71,46,.28);
+    --accent:#ccd5ae;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{
-    font-family:"Pretendard","Apple SD Gothic Neo",system-ui,sans-serif;
+    font-family:"Inter","Apple SD Gothic Neo",system-ui,sans-serif;
+    color:var(--forest);
     background:
-      radial-gradient(900px 600px at 85% -10%, var(--glow), transparent 60%),
-      radial-gradient(700px 500px at 0% 100%, rgba(92,200,255,.18), transparent 55%),
-      var(--bg);
-    color:var(--ink); min-height:100vh; line-height:1.6;
-    display:flex; align-items:center; justify-content:center; padding:24px;
-    transition:background .6s ease;
+      radial-gradient(1200px 700px at 80% -5%, var(--olive), transparent 55%),
+      radial-gradient(900px 600px at -5% 100%, var(--moss), transparent 50%),
+      var(--cream);
+    min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased;padding:104px 20px 60px;
   }
-  .app{width:100%;max-width:560px}
-  .screen{display:none; animation:fade .45s ease}
+  .disp{font-family:"Anton","Black Han Sans",sans-serif;font-weight:400;letter-spacing:-.03em;line-height:.82}
+  .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3em;color:var(--forest);opacity:.65}
+
+  .noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 28px}
+  .logo{font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:15px}
+  .navpill{display:flex;gap:20px;padding:11px 22px;border-radius:40px;background:#ffffff2e;
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid #ffffff55}
+  .navpill a{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--forest);text-decoration:none;opacity:.7;cursor:pointer}
+  .badge{background:#fff;border-radius:30px;padding:7px 15px;font-size:11px;font-weight:700;letter-spacing:.1em;box-shadow:var(--shadow)}
+  @media(max-width:560px){.navpill{display:none}}
+
+  .app{width:100%;max-width:620px;margin:0 auto;position:relative}
+  .screen{display:none}
   .screen.on{display:block}
-  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  @keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
 
-  .card{background:linear-gradient(180deg,var(--card),#10121f);
-    border:1px solid var(--line); border-radius:24px; padding:34px 30px;
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.7)}
+  .reveal{opacity:1;transform:none}
+  .reveal.in{animation:revealUp 1.1s var(--ease)}
+  @keyframes revealUp{from{opacity:0;transform:translateY(90px)}to{opacity:1;transform:none}}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(5deg)}}
+  @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-26px) rotate(-6deg)}}
 
-  /* INTRO */
-  .badge{display:inline-block;font-size:12px;letter-spacing:2px;color:var(--acc2);
-    border:1px solid var(--line);background:rgba(124,92,255,.1);padding:6px 14px;border-radius:30px;margin-bottom:20px}
-  h1{font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1.2}
-  h1 .g{background:linear-gradient(100deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .intro-p{color:var(--sub);margin-top:16px;font-size:15.5px}
-  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 28px}
-  .chip{font-size:22px;background:#0e1020;border:1px solid var(--line);width:46px;height:46px;border-radius:13px;display:grid;place-items:center}
-  .meta{color:var(--mut);font-size:13px;margin-top:18px;text-align:center}
+  .block-card{border-radius:2.5rem;padding:46px 38px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .sage{background:var(--sage)} .olive{background:var(--olive)} .forest{background:var(--forest);color:var(--cream)}
 
-  /* BUTTON */
-  .btn{width:100%;border:none;cursor:pointer;font-family:inherit;
-    background:linear-gradient(100deg,var(--acc),var(--acc2));color:#0b0d18;
-    font-weight:800;font-size:17px;padding:17px;border-radius:15px;
-    transition:transform .12s, box-shadow .25s; box-shadow:0 12px 30px -10px var(--glow)}
-  .btn:hover{transform:translateY(-2px)}
-  .btn:active{transform:translateY(0)}
-  .btn.ghost{background:transparent;color:var(--sub);border:1px solid var(--line);box-shadow:none;font-weight:600;font-size:15px}
+  /* HERO */
+  .hero{text-align:center;border-radius:5rem;position:relative}
+  .hero .label{margin-bottom:18px;display:block}
+  .hero h1{font-size:clamp(54px,16vw,140px);margin:6px 0 4px}
+  .hero h1 .ln{display:block}
+  .hero h1 .let{display:inline-block}
+  .hero.in h1 .let{animation:letUp .9s var(--ease) both}
+  @keyframes letUp{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+  .hero .sub{max-width:440px;margin:24px auto 0;font-size:15px;opacity:.85}
+  .gallery{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:26px}
+  .gchip{width:90px;text-align:center}
+  .gav{width:90px;height:96px;border-radius:1.6rem;background:var(--cream);box-shadow:var(--shadow);overflow:hidden}
+  .gchip span{display:block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.02em}
+  @media(max-width:560px){.gchip{width:60px}.gav{width:60px;height:66px}.gchip span{font-size:9px}}
+  .floaty{position:absolute;width:84px;height:90px;border-radius:2rem;overflow:hidden;background:var(--cream);box-shadow:var(--shadow);z-index:2}
+  .floaty svg{width:100%;height:100%}
+  .f1{top:3%;left:-3%;animation:float 7s var(--ease) infinite}
+  .f2{top:10%;right:-4%;animation:floatB 8s var(--ease) infinite}
+  @media(max-width:560px){.f1,.f2{display:none}}
 
-  /* QUESTION */
-  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-  .qcount{font-size:13px;color:var(--mut);font-weight:600}
-  .bar{height:7px;background:#0e1020;border-radius:10px;overflow:hidden;margin-bottom:26px}
-  .bar > i{display:block;height:100%;width:0;border-radius:10px;
-    background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .4s ease}
-  .qtext{font-size:21px;font-weight:800;letter-spacing:-.4px;margin-bottom:22px;line-height:1.35}
-  .opt{display:flex;align-items:center;gap:13px;width:100%;text-align:left;cursor:pointer;
-    background:#0f1120;border:1px solid var(--line);color:var(--ink);
-    font-family:inherit;font-size:15.5px;padding:15px 16px;border-radius:14px;margin-bottom:11px;
-    transition:border-color .18s, background .18s, transform .12s}
-  .opt:hover{border-color:var(--acc);background:#141731;transform:translateX(3px)}
-  .opt .ico{font-size:22px;flex:none}
-  .opt .tx{flex:1}
-  .opt .tx b{display:block;font-weight:700}
-  .opt .tx span{font-size:12.5px;color:var(--mut)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
+    font-family:"Inter",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:13px;
+    border:none;background:var(--forest);color:var(--cream);padding:20px 40px;border-radius:40px;box-shadow:var(--shadow);
+    transition:transform .5s var(--ease)}
+  .btn:hover{transform:translateY(-4px)}
+  .btn.alt{background:var(--cream);color:var(--forest)}
+  .btn.ghost{background:transparent;color:var(--forest);box-shadow:none;border:1.5px solid var(--forest)}
+  .btn.block{display:flex;width:100%;margin-top:32px}
+
+  /* PROFILE */
+  .ptitle{font-size:clamp(34px,8vw,60px);margin-bottom:6px}
+  .psub{font-size:14px;opacity:.8;margin-bottom:30px}
+  .field{margin-bottom:24px}
+  .field>.label{display:block;margin-bottom:11px}
+  .seg{display:flex;gap:12px}
+  .seg button{flex:1;padding:18px;border-radius:1.5rem;border:1.5px solid transparent;background:var(--cream);
+    font-family:inherit;font-weight:700;font-size:16px;color:var(--forest);cursor:pointer;
+    box-shadow:0 12px 24px -16px rgba(1,71,46,.4);transition:all .35s var(--ease)}
+  .seg button.on{background:var(--forest);color:var(--cream);transform:translateY(-2px)}
+  .inp{display:flex;align-items:center;gap:8px;background:var(--cream);border-radius:1.5rem;padding:15px 20px;box-shadow:0 12px 24px -16px rgba(1,71,46,.4)}
+  .inp input{flex:1;border:none;background:none;font-family:inherit;font-size:22px;font-weight:700;color:var(--forest);outline:none;width:100%}
+  .inp input::placeholder{color:var(--forest);opacity:.3}
+  .inp .u{font-weight:700;opacity:.45}
+  .skip{text-align:center;margin-top:14px;font-size:12px;opacity:.55}
+
+  /* QUIZ */
+  .qhead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
+  .qnum{font-size:clamp(52px,14vw,100px)}
+  .qnum small{font-size:.28em;opacity:.4}
+  .bar{height:8px;background:#ffffff7a;border-radius:10px;overflow:hidden;margin-bottom:28px}
+  .bar>i{display:block;height:100%;width:0;border-radius:10px;background:var(--forest);transition:width .6s var(--ease)}
+  .qtext{font-size:clamp(21px,4.2vw,29px);font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:24px}
+  .opt{display:flex;align-items:center;gap:16px;width:100%;text-align:left;cursor:pointer;background:var(--cream);
+    border:1.5px solid transparent;color:var(--forest);font-family:inherit;padding:17px 18px;border-radius:1.6rem;
+    margin-bottom:12px;box-shadow:0 12px 24px -16px rgba(1,71,46,.4);transition:transform .45s var(--ease),border-color .3s,background .3s}
+  .opt:hover{transform:translateX(8px);border-color:var(--forest);background:#fff}
+  .opt .ico{font-family:"Anton",sans-serif;font-size:20px;width:48px;height:48px;flex:none;border-radius:1.1rem;
+    background:var(--olive);display:grid;place-items:center;color:var(--forest)}
+  .opt .tx{font-size:15.5px;font-weight:500;line-height:1.4}
+  .back{cursor:pointer;background:none;border:none;font-family:inherit;font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--forest);opacity:.6;padding:6px}
 
   /* RESULT */
-  .r-emoji{font-size:84px;text-align:center;animation:pop .6s ease;filter:drop-shadow(0 8px 24px var(--glow))}
-  .r-kicker{text-align:center;color:var(--acc2);font-weight:700;font-size:14px;letter-spacing:1px;margin-top:6px}
-  .r-name{text-align:center;font-size:30px;font-weight:900;letter-spacing:-1px;margin-top:4px}
-  .r-tags{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:16px 0 22px}
-  .r-tag{font-size:12.5px;color:var(--ink);background:rgba(255,255,255,.06);border:1px solid var(--line);padding:5px 12px;border-radius:20px}
-  .block{background:#0f1120;border:1px solid var(--line);border-radius:15px;padding:18px 18px;margin-bottom:14px}
-  .block h4{font-size:13px;color:var(--acc2);letter-spacing:.5px;margin-bottom:8px;text-transform:uppercase}
-  .block p{font-size:14.5px;color:var(--sub)}
-  .tips{list-style:none}
-  .tips li{font-size:14px;color:var(--sub);padding:7px 0 7px 26px;position:relative;border-bottom:1px dashed var(--line)}
-  .tips li:last-child{border-bottom:none}
-  .tips li:before{content:"✔";position:absolute;left:0;color:var(--acc)}
-  /* 점수 막대 (로직 시각화) */
-  .score{display:flex;align-items:center;gap:10px;margin:9px 0}
-  .score .sn{width:74px;font-size:12.5px;color:var(--sub);flex:none}
-  .score .st{flex:1;height:9px;background:#0e1020;border-radius:8px;overflow:hidden}
-  .score .sf{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--acc),var(--acc2));width:0;transition:width .7s ease}
-  .score .sv{width:30px;text-align:right;font-size:12px;color:var(--mut);flex:none}
-  .r-actions{display:flex;gap:10px;margin-top:8px}
-  .r-actions .btn{flex:1}
+  .r-avatar{width:150px;height:165px;margin:0 auto;display:block;animation:float 7s var(--ease) infinite;
+    filter:drop-shadow(0 18px 30px rgba(0,0,0,.3))}
+  .r-kicker{text-align:center;margin-top:18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.34em;color:var(--accent)}
+  .r-name{text-align:center;font-size:clamp(44px,11vw,86px);margin-top:6px;color:var(--cream)}
+  .r-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px}
+  .r-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--forest);background:var(--accent);padding:7px 14px;border-radius:30px}
+  .r-block{background:#ffffff14;border:1px solid #ffffff1f;border-radius:1.8rem;padding:22px 24px;margin-top:16px}
+  .r-block h4{font-size:11px;text-transform:uppercase;letter-spacing:.24em;color:var(--accent);margin-bottom:10px}
+  .r-block p{font-size:15px;color:var(--sage);line-height:1.65}
+  .plan div{padding:11px 0;border-bottom:1px solid #ffffff14}
+  .plan div:last-child{border-bottom:none}
+  .plan .label{display:block;color:var(--accent);opacity:.9;margin-bottom:3px}
+  .plan p{color:var(--sage);font-size:14.5px}
+  .plan p .dim{opacity:.55;font-weight:400}
+  .score{display:flex;align-items:center;gap:12px;margin:10px 0}
+  .score .sn{width:118px;font-size:13px;color:var(--sage);flex:none;font-weight:500}
+  .score .st{flex:1;height:10px;background:#ffffff1f;border-radius:8px;overflow:hidden}
+  .score .sf{height:100%;width:0;border-radius:8px;background:var(--accent);transition:width .9s var(--ease)}
+  .score .sv{width:24px;text-align:right;font-size:13px;color:var(--accent);font-weight:700;flex:none}
+  .r-actions{display:flex;gap:12px;margin-top:30px}
+  .r-actions .btn{flex:1;padding:18px 18px}
+  .r-actions .btn.ghost{border-color:var(--accent);color:var(--accent)}
+
+  footer{text-align:center;margin:46px auto 0;max-width:620px}
+  footer .label{opacity:.4;font-size:10px}
 </style>
 </head>
 <body>
+<div class="noise"></div>
+
+<nav>
+  <div class="logo">— BODYTYPE</div>
+  <div class="navpill">
+    <a onclick="restart()">TEST</a>
+    <a onclick="restart()">RESTART</a>
+    <a>ABOUT</a>
+  </div>
+  <div class="badge">5 / FOREST EDITION</div>
+</nav>
+
 <div class="app">
 
-  <!-- ===== 1. 인트로 ===== -->
+  <!-- 인트로 -->
   <section class="screen on" id="intro">
-    <div class="card">
-      <span class="badge">BODY CHARACTER TEST</span>
-      <h1>내가 진짜 원하는 몸은<br><span class="g">어떤 캐릭터일까?</span></h1>
-      <p class="intro-p">운동 목표·시간·식단·취향에 답하면, 당신이 꿈꾸는 몸을 가장 잘 닮은
-      <b>유명 캐릭터</b>를 추천해 드려요. 5개 질문, 30초면 충분합니다.</p>
-      <div class="chips">
-        <div class="chip">🛡️</div><div class="chip">💚</div><div class="chip">🐉</div><div class="chip">❄️</div><div class="chip">🍯</div>
-      </div>
-      <button class="btn" onclick="start()">테스트 시작하기</button>
-      <p class="meta">질문 5개 · 결과 5종 · 별도 설치 없이 바로 실행</p>
+    <div class="block-card sage hero reveal" id="hero">
+      <div class="floaty f1" id="fl1"></div>
+      <div class="floaty f2" id="fl2"></div>
+      <span class="label">BODY CHARACTER TEST · 2026</span>
+      <h1 class="disp" id="heroTitle"><span class="ln">내가 원하는</span><span class="ln">몸은?</span></h1>
+      <p class="sub">5개의 질문에 답하면, 당신이 꿈꾸는 몸을 가장 닮은 <b>캐릭터</b>와
+        성별·체중에 맞춘 <b>운동·식단 처방</b>까지 받아볼 수 있어요.</p>
+      <div class="gallery" id="gallery"></div>
+      <button class="btn block" onclick="goProfile()">시작하기 →</button>
     </div>
   </section>
 
-  <!-- ===== 2. 질문 ===== -->
+  <!-- 프로필 -->
+  <section class="screen" id="profile">
+    <div class="block-card olive reveal" id="profileCard">
+      <h2 class="ptitle disp">먼저, 당신은?</h2>
+      <p class="psub">성별과 몸무게를 알려주면 결과 처방을 더 정확하게 맞춰드려요.</p>
+      <div class="field">
+        <span class="label">성별 / Gender</span>
+        <div class="seg">
+          <button id="gM" onclick="setGender('남')">남성</button>
+          <button id="gF" onclick="setGender('여')">여성</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="label">몸무게 / Weight</span>
+        <div class="inp"><input id="wInput" type="number" inputmode="decimal" placeholder="예: 65" min="20" max="200"><span class="u">KG</span></div>
+      </div>
+      <button class="btn block" onclick="beginQuiz()">테스트 시작 →</button>
+      <p class="skip">입력 없이 시작해도 돼요 — 처방은 일반 기준으로 안내됩니다.</p>
+    </div>
+  </section>
+
+  <!-- 질문 -->
   <section class="screen" id="quiz">
-    <div class="card">
-      <div class="qtop">
-        <span class="qcount" id="qcount">Q1 / 5</span>
-        <button class="btn ghost" style="width:auto;padding:6px 14px" onclick="back()">← 이전</button>
+    <div class="block-card olive reveal" id="quizCard">
+      <div class="qhead">
+        <div class="qnum disp"><span id="qnow">01</span><small> / 05</small></div>
+        <button class="back" onclick="back()">← 이전</button>
       </div>
       <div class="bar"><i id="barfill"></i></div>
       <div class="qtext" id="qtext"></div>
@@ -122,223 +204,47 @@
     </div>
   </section>
 
-  <!-- ===== 3. 결과 ===== -->
+  <!-- 결과 -->
   <section class="screen" id="result">
-    <div class="card">
-      <div class="r-emoji" id="rEmoji">🛡️</div>
+    <div class="block-card forest reveal" id="resultCard">
+      <div class="r-avatar" id="rAvatar"></div>
       <div class="r-kicker" id="rKicker"></div>
-      <div class="r-name" id="rName"></div>
+      <div class="r-name disp" id="rName"></div>
       <div class="r-tags" id="rTags"></div>
-
-      <div class="block">
-        <h4>왜 이 캐릭터일까</h4>
-        <p id="rReason"></p>
-      </div>
-      <div class="block">
-        <h4>한 줄 설명</h4>
-        <p id="rDesc"></p>
-      </div>
-      <div class="block">
-        <h4>추천 루틴</h4>
-        <ul class="tips" id="rTips"></ul>
-      </div>
-      <div class="block">
-        <h4>나의 성향 점수</h4>
-        <div id="rScores"></div>
-      </div>
-
+      <div class="r-block"><h4>Why this character / 왜 이 캐릭터일까</h4><p id="rReason"></p></div>
+      <div class="r-block"><h4>One line / 한 줄 설명</h4><p id="rDesc"></p></div>
+      <div class="r-block"><h4>Personalized / 너만을 위한 처방</h4><div class="plan" id="rPlan"></div></div>
+      <div class="r-block"><h4>Your scores / 나의 성향 점수</h4><div id="rScores"></div></div>
       <div class="r-actions">
         <button class="btn ghost" onclick="restart()">다시하기</button>
-        <button class="btn" onclick="restart()">친구에게 추천 🔗</button>
+        <button class="btn alt" onclick="restart()">친구에게 추천 🔗</button>
       </div>
     </div>
   </section>
 
 </div>
 
+<footer><span class="label">— Earthy editorial · Forest &amp; Sage · Made with Claude Code</span></footer>
+
 <script>
-/* =========================================================
-   결과 캐릭터 정의 — 각 캐릭터는 '원하는 몸매 아키타입'을 상징
-   key: cap(균형/슬림탄탄) hulk(벌크/파워) bruce(커팅/잔근육)
-        elsa(슬림/라인) pooh(건강/편안)
-   ========================================================= */
-const CHARS = {
-  cap: {
-    emoji:"🛡️", kicker:"THE GOLDEN ALL-ROUNDER",
-    name:"캡틴 아메리카",
-    theme:{acc:"#3a6df0", acc2:"#e23b4e", glow:"rgba(58,109,240,.45)"},
-    tags:["슬림탄탄","황금비율 V라인","올라운더"],
-    reason:"당신은 ‘너무 크지도, 마르지도 않은’ 균형 잡힌 몸을 원해요. 웨이트와 유산소를 골고루 챙기고, 꾸준한 루틴을 좋아하는 답변이 많았죠. 한쪽으로 치우치지 않는 이상적인 비율 — 딱 슈퍼솔저의 실루엣입니다.",
-    desc:"넓은 어깨와 잘록한 허리, 어디에 내놔도 멋진 ‘교과서 몸’. MZ가 가장 선호한다는 lean-muscular 체형의 정석이에요.",
-    tips:["주 4~5회, 상·하체 분할 웨이트 + 가벼운 유산소","어깨·등 키워 V라인, 코어로 허리 라인 정리","단백질 챙긴 균형 식단(극단적 벌크/커팅 X)"]
-  },
-  hulk: {
-    emoji:"💚", kicker:"THE POWER BEAST",
-    name:"헐크",
-    theme:{acc:"#3ddc84", acc2:"#8a5cff", glow:"rgba(61,220,132,.4)"},
-    tags:["압도적 벌크","최대 근육량","파워리프팅"],
-    reason:"당신의 답변은 ‘일단 크고 강하게’로 일관됐어요. 무거운 중량, 빡센 빈도, 많이 먹는 벌크업까지 — 사이즈와 힘 그 자체를 원하는 타입. 가장 거대하고 강력한 캐릭터, 헐크가 어울립니다.",
-    desc:"존재감으로 압도하는 매스 몬스터. 디테일보다 ‘크기와 파워’가 목표인 사람의 로망이죠.",
-    tips:["주 5~6회, 스쿼트·데드·벤치 등 복합 중량 운동","점진적 과부하 + 충분한 칼로리·단백질 잉여","휴식과 수면으로 회복 — 근육은 쉴 때 큰다"]
-  },
-  bruce: {
-    emoji:"🐉", kicker:"THE SHREDDED MACHINE",
-    name:"이소룡(브루스 리)",
-    theme:{acc:"#ffd23f", acc2:"#1c1c1c", glow:"rgba(255,210,63,.4)"},
-    tags:["초저체지방","선명한 잔근육","민첩·실전형"],
-    reason:"당신은 크기보다 ‘칼각’을 원해요. 체지방을 쫙 빼서 선명하게 갈라진 잔근육, 군더더기 없는 날렵함을 택한 답변이 많았죠. 맨몸·고강도를 즐기는 당신은 전설의 무도가, 이소룡 타입.",
-    desc:"불필요한 건 다 덜어낸 기능적인 몸. 무겁진 않아도 보면 ‘운동 좀 하는구나’ 단번에 느껴지는 실전형 피지컬.",
-    tips:["웨이트 + 복싱·크로스핏·맨몸운동으로 체지방 커팅","고강도 인터벌(HIIT)로 선명도 끌어올리기","칼로리·체지방 관리는 철저하게, 단 무리한 단식은 금물"]
-  },
-  elsa: {
-    emoji:"❄️", kicker:"THE GRACEFUL LINE",
-    name:"엘사",
-    theme:{acc:"#5cc8ff", acc2:"#c9a7ff", glow:"rgba(92,200,255,.4)"},
-    tags:["슬림 라인","유연성","바른 자세"],
-    reason:"당신은 ‘크고 강한’보다 길고 우아한 라인을 원해요. 요가·필라테스 같은 유연성 운동, 클린하고 가벼운 식단을 택했죠. 군살 없이 곧고 우아한 실루엣 — 얼음처럼 시린 엘사의 자태입니다.",
-    desc:"근육보다 라인과 자세가 핵심. 길어 보이는 몸, 유연한 가동성, 단정한 분위기를 추구하는 타입이에요.",
-    tips:["주 2~3회 필라테스·요가로 코어와 유연성 강화","전신 라인을 살리는 스트레칭·자세 교정 루틴","소식·클린식 위주, 부종 줄이는 수분·나트륨 관리"]
-  },
-  pooh: {
-    emoji:"🍯", kicker:"THE HAPPY & HEALTHY",
-    name:"곰돌이 푸",
-    theme:{acc:"#ffb13b", acc2:"#ff6f6f", glow:"rgba(255,177,59,.4)"},
-    tags:["건강한 통통","스트레스 프리","있는 그대로"],
-    reason:"당신에게 몸은 ‘스트레스 받으며 만드는 것’이 아니에요. 무리한 운동·식단보다 건강하고 행복한 일상을 택한 답변이 많았죠. 둥글둥글 편안하지만 누구보다 사랑받는 곰돌이 푸가 딱이에요.",
-    desc:"꼭 식스팩이 아니어도 좋아요. 잘 걷고, 잘 먹고, 잘 웃는 건강한 몸 — 요즘 다시 주목받는 ‘바디 포지티브’의 주인공.",
-    tips:["주 1~2회 산책·가벼운 홈트로 활동량 유지","극단적 다이어트 대신 규칙적인 식사와 수면","좋아하는 음식도 즐기되, 꾸준함만 챙기기"]
-  }
+/* ===== SVG 캐릭터 아바타 (체형별 실루엣 + 상징) ===== */
+const SIL={
+  cap:{sw:32,ww:15,aw:9,fig:"#01472e",bg:"#ccd5ae",sym:"🛡️",line:true},
+  hulk:{sw:45,ww:28,aw:17,fig:"#244b30",bg:"#a3b18a",sym:"💪",line:true},
+  bruce:{sw:27,ww:12,aw:7,fig:"#3a2f0c",bg:"#e9c46a",sym:"🐉",line:true},
+  elsa:{sw:18,ww:12,aw:5,fig:"#235e72",bg:"#bcdce6",sym:"❄️",line:false},
+  pooh:{sw:25,ww:30,aw:11,fig:"#8a5a12",bg:"#e9b949",sym:"🍯",line:false}
 };
-
-/* =========================================================
-   질문 정의 — 각 선택지의 ⟨아이콘 / 제목 / 부연 / 가리키는 캐릭터⟩
-   선택지 순서를 cap→hulk→bruce→elsa→pooh 로 통일해 로직을 명확히
-   ========================================================= */
-const QUESTIONS = [
-  { q:"운동으로 가장 만들고 싶은 건?", o:[
-    {i:"🛡️",t:"균형 잡힌 비율과 멋진 실루엣",s:"넓은 어깨·잘록한 허리",k:"cap"},
-    {i:"💚",t:"최대한 크고 강한 근육",s:"사이즈와 파워",k:"hulk"},
-    {i:"🐉",t:"체지방 쫙 뺀 선명한 잔근육",s:"칼각·커팅",k:"bruce"},
-    {i:"❄️",t:"길고 곧은 우아한 라인",s:"라인·유연성",k:"elsa"},
-    {i:"🍯",t:"건강하고 편안하면 충분",s:"무리 안 함",k:"pooh"},
-  ]},
-  { q:"일주일에 운동에 쓰고 싶은 시간은?", o:[
-    {i:"🛡️",t:"주 4~5회, 꾸준한 루틴",s:"밸런스형",k:"cap"},
-    {i:"💚",t:"주 5~6회, 빡세게 많이",s:"하드코어",k:"hulk"},
-    {i:"🐉",t:"주 5회+, 고강도로 짧고 굵게",s:"인텐스",k:"bruce"},
-    {i:"❄️",t:"주 2~3회, 가볍게 라인 위주",s:"마일드",k:"elsa"},
-    {i:"🍯",t:"주 1~2회, 산책 정도면 OK",s:"여유롭게",k:"pooh"},
-  ]},
-  { q:"끌리는 운동 스타일은?", o:[
-    {i:"🛡️",t:"웨이트 + 유산소 밸런스",s:"올라운드",k:"cap"},
-    {i:"💚",t:"스쿼트·데드리프트 중량 운동",s:"파워",k:"hulk"},
-    {i:"🐉",t:"복싱·크로스핏·맨몸운동",s:"펑셔널",k:"bruce"},
-    {i:"❄️",t:"필라테스·요가·스트레칭",s:"코어·유연",k:"elsa"},
-    {i:"🍯",t:"산책·가벼운 홈트",s:"라이트",k:"pooh"},
-  ]},
-  { q:"식단은 어떻게 관리하고 싶어?", o:[
-    {i:"🛡️",t:"단백질 챙긴 균형 잡힌 식사",s:"클린 밸런스",k:"cap"},
-    {i:"💚",t:"많이 먹고 키운다, 벌크업",s:"잘 먹기",k:"hulk"},
-    {i:"🐉",t:"칼로리·체지방 철저히 커팅",s:"빡센 관리",k:"bruce"},
-    {i:"❄️",t:"소식·클린식으로 가볍게",s:"가볍게",k:"elsa"},
-    {i:"🍯",t:"맛있는 게 최고, 스트레스 X",s:"행복 우선",k:"pooh"},
-  ]},
-  { q:"내가 원하는 ‘몸’을 한마디로 한다면?", o:[
-    {i:"🛡️",t:"어디서나 멋진 황금비율 올라운더",s:"",k:"cap"},
-    {i:"💚",t:"압도하는 사이즈와 힘",s:"",k:"hulk"},
-    {i:"🐉",t:"군더더기 없는 칼각·날렵함",s:"",k:"bruce"},
-    {i:"❄️",t:"길고 유연한 우아한 라인",s:"",k:"elsa"},
-    {i:"🍯",t:"건강하고 행복한, 있는 그대로",s:"",k:"pooh"},
-  ]},
-];
-
-/* 마지막 질문(원하는 몸 정체성)은 가중치 2배 → 동점 방지 + 핵심 반영 */
-const WEIGHTS = [1, 1, 1, 1, 2];
-
-let qi = 0;
-const answers = []; // 선택한 캐릭터 key 기록
-
-const $ = id => document.getElementById(id);
-const show = id => { document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); $(id).classList.add("on"); };
-
-function start(){ qi=0; answers.length=0; render(); show("quiz"); }
-function back(){ if(qi===0){ show("intro"); return;} qi--; answers.pop(); render(); }
-
-function render(){
-  const Q = QUESTIONS[qi];
-  $("qcount").textContent = `Q${qi+1} / ${QUESTIONS.length}`;
-  $("barfill").style.width = ((qi)/QUESTIONS.length*100)+"%";
-  $("qtext").textContent = Q.q;
-  const box = $("opts"); box.innerHTML = "";
-  Q.o.forEach(op=>{
-    const b = document.createElement("button");
-    b.className = "opt";
-    b.innerHTML = `<span class="ico">${op.i}</span>
-      <span class="tx"><b>${op.t}</b>${op.s?`<span>${op.s}</span>`:""}</span>`;
-    b.onclick = ()=> choose(op.k);
-    box.appendChild(b);
-  });
+function avatar(key,sym){
+  const p=SIL[key],cx=60;
+  const armL=`<rect x="${cx-p.sw-p.aw/2}" y="58" width="${p.aw}" height="62" rx="${p.aw/2}" fill="${p.fig}"/>`;
+  const armR=`<rect x="${cx+p.sw-p.aw/2}" y="58" width="${p.aw}" height="62" rx="${p.aw/2}" fill="${p.fig}"/>`;
+  const torso=`<path d="M ${cx-p.sw} 58 Q ${cx-p.sw} 51 60 49 Q ${cx+p.sw} 51 ${cx+p.sw} 58 L ${cx+p.ww} 130 Q 60 139 ${cx-p.ww} 130 Z" fill="${p.fig}"/>`;
+  const def=p.line?`<line x1="60" y1="68" x2="60" y2="120" stroke="${p.bg}" stroke-width="2.6" opacity="0.4"/><line x1="${cx-p.ww*0.55}" y1="92" x2="${cx+p.ww*0.55}" y2="92" stroke="${p.bg}" stroke-width="2.2" opacity="0.32"/>`:"";
+  const neck=`<rect x="53" y="46" width="14" height="11" fill="${p.fig}"/>`;
+  const head=`<circle cx="60" cy="34" r="15" fill="${p.fig}"/>`;
+  const badge=sym?`<circle cx="99" cy="108" r="17" fill="#fefae0"/><text x="99" y="115" font-size="19" text-anchor="middle">${p.sym}</text>`:"";
+  return `<svg viewBox="0 0 120 140" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="80" rx="56" ry="58" fill="${p.bg}" opacity="0.5"/>${armL}${armR}${torso}${def}${neck}${head}${badge}</svg>`;
 }
 
-function choose(key){
-  answers[qi] = key;
-  if(qi < QUESTIONS.length-1){ qi++; render(); }
-  else finish();
-}
-
-function finish(){
-  // 점수 집계: 선택 캐릭터에 질문별 가중치 합산
-  const score = {cap:0,hulk:0,bruce:0,elsa:0,pooh:0};
-  answers.forEach((k,idx)=> score[k] += WEIGHTS[idx]);
-
-  // 최고 득점 캐릭터 (동점이면 마지막 Q5 선택을 우선)
-  let best = Object.keys(score).reduce((a,b)=> score[b] > score[a] ? b : a, "cap");
-  const top = Math.max(...Object.values(score));
-  const tied = Object.keys(score).filter(k=>score[k]===top);
-  if(tied.length > 1 && tied.includes(answers[4])) best = answers[4];
-
-  paint(best, score);
-  $("barfill").style.width = "100%";
-  show("result");
-}
-
-function paint(key, score){
-  const c = CHARS[key];
-  // 캐릭터 테마 색 적용
-  document.documentElement.style.setProperty("--acc", c.theme.acc);
-  document.documentElement.style.setProperty("--acc2", c.theme.acc2);
-  document.documentElement.style.setProperty("--glow", c.theme.glow);
-
-  $("rEmoji").textContent = c.emoji;
-  $("rKicker").textContent = c.kicker;
-  $("rName").textContent = c.name;
-  $("rTags").innerHTML = c.tags.map(t=>`<span class="r-tag"># ${t}</span>`).join("");
-  $("rReason").textContent = c.reason;
-  $("rDesc").textContent = c.desc;
-  $("rTips").innerHTML = c.tips.map(t=>`<li>${t}</li>`).join("");
-
-  // 점수 막대 (높은 순)
-  const maxV = Math.max(...Object.values(score), 1);
-  const rows = Object.keys(score).sort((a,b)=>score[b]-score[a]);
-  $("rScores").innerHTML = rows.map(k=>{
-    const w = Math.round(score[k]/maxV*100);
-    return `<div class="score"><span class="sn">${CHARS[k].emoji} ${CHARS[k].name}</span>
-      <span class="st"><span class="sf" style="width:0"></span></span>
-      <span class="sv">${score[k]}</span></div>`;
-  }).join("");
-  // 막대 애니메이션
-  requestAnimationFrame(()=> {
-    const fills = $("rScores").querySelectorAll(".sf");
-    rows.forEach((k,idx)=> fills[idx].style.width = Math.round(score[k]/maxV*100)+"%");
-  });
-}
-
-function restart(){
-  document.documentElement.style.setProperty("--acc","#7c5cff");
-  document.documentElement.style.setProperty("--acc2","#5cc8ff");
-  document.documentElement.style.setProperty("--glow","rgba(124,92,255,.45)");
-  show("intro");
-}
-</script>
-</body>
-</html>
+/* ===== 결과 캐릭터 ===== */
