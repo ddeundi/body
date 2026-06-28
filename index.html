@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BODY TYPE — 내가 원하는 몸은?</title>
+<title>BODY TYPE — 네 몸 속 히어로는?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -17,8 +17,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:"Inter","Apple SD Gothic Neo",system-ui,sans-serif;
-    color:var(--forest);
+    font-family:"Inter","Apple SD Gothic Neo",system-ui,sans-serif;color:var(--forest);
     background:
       radial-gradient(1200px 700px at 80% -5%, var(--olive), transparent 55%),
       radial-gradient(900px 600px at -5% 100%, var(--moss), transparent 50%),
@@ -40,14 +39,13 @@
   @media(max-width:560px){.navpill{display:none}}
 
   .app{width:100%;max-width:620px;margin:0 auto;position:relative}
-  .screen{display:none}
-  .screen.on{display:block}
+  .screen{display:none} .screen.on{display:block}
 
   .reveal{opacity:1;transform:none}
   .reveal.in{animation:revealUp 1.1s var(--ease)}
   @keyframes revealUp{from{opacity:0;transform:translateY(90px)}to{opacity:1;transform:none}}
-  @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(5deg)}}
-  @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-26px) rotate(-6deg)}}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(4deg)}}
+  @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-26px) rotate(-5deg)}}
 
   .block-card{border-radius:2.5rem;padding:46px 38px;box-shadow:var(--shadow);position:relative;overflow:hidden}
   .sage{background:var(--sage)} .olive{background:var(--olive)} .forest{background:var(--forest);color:var(--cream)}
@@ -60,22 +58,21 @@
   .hero h1 .let{display:inline-block}
   .hero.in h1 .let{animation:letUp .9s var(--ease) both}
   @keyframes letUp{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
-  .hero .sub{max-width:440px;margin:24px auto 0;font-size:15px;opacity:.85}
+  .hero .sub{max-width:450px;margin:24px auto 0;font-size:15px;opacity:.85}
   .gallery{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:26px}
-  .gchip{width:90px;text-align:center}
-  .gav{width:90px;height:96px;border-radius:1.6rem;background:var(--cream);box-shadow:var(--shadow);overflow:hidden}
-  .gchip span{display:block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.02em}
-  @media(max-width:560px){.gchip{width:60px}.gav{width:60px;height:66px}.gchip span{font-size:9px}}
-  .floaty{position:absolute;width:84px;height:90px;border-radius:2rem;overflow:hidden;background:var(--cream);box-shadow:var(--shadow);z-index:2}
+  .gchip{width:92px;text-align:center}
+  .gav{width:92px;height:112px;border-radius:1.6rem;background:var(--cream);box-shadow:var(--shadow);overflow:hidden}
+  .gchip span{display:block;margin-top:8px;font-size:11px;font-weight:700}
+  @media(max-width:560px){.gchip{width:60px}.gav{width:60px;height:76px}.gchip span{font-size:9px}}
+  .floaty{position:absolute;width:80px;height:104px;border-radius:2rem;overflow:hidden;background:var(--cream);box-shadow:var(--shadow);z-index:2}
   .floaty svg{width:100%;height:100%}
-  .f1{top:3%;left:-3%;animation:float 7s var(--ease) infinite}
-  .f2{top:10%;right:-4%;animation:floatB 8s var(--ease) infinite}
+  .f1{top:1%;left:-3%;animation:float 7s var(--ease) infinite}
+  .f2{top:8%;right:-4%;animation:floatB 8s var(--ease) infinite}
   @media(max-width:560px){.f1,.f2{display:none}}
 
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
     font-family:"Inter",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:13px;
-    border:none;background:var(--forest);color:var(--cream);padding:20px 40px;border-radius:40px;box-shadow:var(--shadow);
-    transition:transform .5s var(--ease)}
+    border:none;background:var(--forest);color:var(--cream);padding:20px 40px;border-radius:40px;box-shadow:var(--shadow);transition:transform .5s var(--ease)}
   .btn:hover{transform:translateY(-4px)}
   .btn.alt{background:var(--cream);color:var(--forest)}
   .btn.ghost{background:transparent;color:var(--forest);box-shadow:none;border:1.5px solid var(--forest)}
@@ -84,23 +81,23 @@
   /* PROFILE */
   .ptitle{font-size:clamp(34px,8vw,60px);margin-bottom:6px}
   .psub{font-size:14px;opacity:.8;margin-bottom:30px}
-  .field{margin-bottom:24px}
+  .field{margin-bottom:22px}
   .field>.label{display:block;margin-bottom:11px}
+  .row2{display:flex;gap:14px} .row2 .field{flex:1}
   .seg{display:flex;gap:12px}
   .seg button{flex:1;padding:18px;border-radius:1.5rem;border:1.5px solid transparent;background:var(--cream);
     font-family:inherit;font-weight:700;font-size:16px;color:var(--forest);cursor:pointer;
     box-shadow:0 12px 24px -16px rgba(1,71,46,.4);transition:all .35s var(--ease)}
   .seg button.on{background:var(--forest);color:var(--cream);transform:translateY(-2px)}
-  .inp{display:flex;align-items:center;gap:8px;background:var(--cream);border-radius:1.5rem;padding:15px 20px;box-shadow:0 12px 24px -16px rgba(1,71,46,.4)}
-  .inp input{flex:1;border:none;background:none;font-family:inherit;font-size:22px;font-weight:700;color:var(--forest);outline:none;width:100%}
+  .inp{display:flex;align-items:center;gap:8px;background:var(--cream);border-radius:1.5rem;padding:15px 18px;box-shadow:0 12px 24px -16px rgba(1,71,46,.4)}
+  .inp input{flex:1;border:none;background:none;font-family:inherit;font-size:21px;font-weight:700;color:var(--forest);outline:none;width:100%}
   .inp input::placeholder{color:var(--forest);opacity:.3}
-  .inp .u{font-weight:700;opacity:.45}
+  .inp .u{font-weight:700;opacity:.45;font-size:13px}
   .skip{text-align:center;margin-top:14px;font-size:12px;opacity:.55}
 
   /* QUIZ */
   .qhead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
-  .qnum{font-size:clamp(52px,14vw,100px)}
-  .qnum small{font-size:.28em;opacity:.4}
+  .qnum{font-size:clamp(52px,14vw,100px)} .qnum small{font-size:.28em;opacity:.4}
   .bar{height:8px;background:#ffffff7a;border-radius:10px;overflow:hidden;margin-bottom:28px}
   .bar>i{display:block;height:100%;width:0;border-radius:10px;background:var(--forest);transition:width .6s var(--ease)}
   .qtext{font-size:clamp(21px,4.2vw,29px);font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:24px}
@@ -108,31 +105,34 @@
     border:1.5px solid transparent;color:var(--forest);font-family:inherit;padding:17px 18px;border-radius:1.6rem;
     margin-bottom:12px;box-shadow:0 12px 24px -16px rgba(1,71,46,.4);transition:transform .45s var(--ease),border-color .3s,background .3s}
   .opt:hover{transform:translateX(8px);border-color:var(--forest);background:#fff}
-  .opt .ico{font-family:"Anton",sans-serif;font-size:20px;width:48px;height:48px;flex:none;border-radius:1.1rem;
-    background:var(--olive);display:grid;place-items:center;color:var(--forest)}
+  .opt .ico{font-family:"Anton",sans-serif;font-size:20px;width:48px;height:48px;flex:none;border-radius:1.1rem;background:var(--olive);display:grid;place-items:center;color:var(--forest)}
   .opt .tx{font-size:15.5px;font-weight:500;line-height:1.4}
   .back{cursor:pointer;background:none;border:none;font-family:inherit;font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--forest);opacity:.6;padding:6px}
 
   /* RESULT */
-  .r-avatar{width:150px;height:165px;margin:0 auto;display:block;animation:float 7s var(--ease) infinite;
-    filter:drop-shadow(0 18px 30px rgba(0,0,0,.3))}
-  .r-kicker{text-align:center;margin-top:18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.34em;color:var(--accent)}
+  .r-avatar{width:155px;height:200px;margin:0 auto;display:block;animation:float 7s var(--ease) infinite;filter:drop-shadow(0 18px 28px rgba(0,0,0,.3))}
+  .r-kicker{text-align:center;margin-top:14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.34em;color:var(--accent)}
   .r-name{text-align:center;font-size:clamp(44px,11vw,86px);margin-top:6px;color:var(--cream)}
   .r-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 4px}
   .r-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--forest);background:var(--accent);padding:7px 14px;border-radius:30px}
   .r-block{background:#ffffff14;border:1px solid #ffffff1f;border-radius:1.8rem;padding:22px 24px;margin-top:16px}
   .r-block h4{font-size:11px;text-transform:uppercase;letter-spacing:.24em;color:var(--accent);margin-bottom:10px}
   .r-block p{font-size:15px;color:var(--sage);line-height:1.65}
-  .plan div{padding:11px 0;border-bottom:1px solid #ffffff14}
-  .plan div:last-child{border-bottom:none}
+  .plan div{padding:11px 0;border-bottom:1px solid #ffffff14} .plan div:last-child{border-bottom:none}
   .plan .label{display:block;color:var(--accent);opacity:.9;margin-bottom:3px}
-  .plan p{color:var(--sage);font-size:14.5px}
-  .plan p .dim{opacity:.55;font-weight:400}
-  .score{display:flex;align-items:center;gap:12px;margin:10px 0}
-  .score .sn{width:118px;font-size:13px;color:var(--sage);flex:none;font-weight:500}
-  .score .st{flex:1;height:10px;background:#ffffff1f;border-radius:8px;overflow:hidden}
-  .score .sf{height:100%;width:0;border-radius:8px;background:var(--accent);transition:width .9s var(--ease)}
-  .score .sv{width:24px;text-align:right;font-size:13px;color:var(--accent);font-weight:700;flex:none}
+  .plan p{color:var(--sage);font-size:14.5px} .plan p .dim{opacity:.55;font-weight:400}
+
+  /* SCORE CHART */
+  .score{margin:14px 0}
+  .score .sline{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+  .score .sn{font-size:13.5px;color:var(--sage);font-weight:500}
+  .score .sv{font-size:13px;color:var(--accent);font-weight:700}
+  .score .st{height:13px;background:#ffffff1a;border-radius:8px;overflow:hidden}
+  .score .sf{height:100%;width:0;border-radius:8px;background:var(--accent);transition:width 1s var(--ease)}
+  .score.win .sn{color:var(--cream);font-weight:700}
+  .score.win .sv{font-size:14px}
+  .score.win .sf{box-shadow:0 0 16px var(--accent)}
+
   .r-actions{display:flex;gap:12px;margin-top:30px}
   .r-actions .btn{flex:1;padding:18px 18px}
   .r-actions .btn.ghost{border-color:var(--accent);color:var(--accent)}
@@ -146,105 +146,5 @@
 
 <nav>
   <div class="logo">— BODYTYPE</div>
-  <div class="navpill">
-    <a onclick="restart()">TEST</a>
-    <a onclick="restart()">RESTART</a>
-    <a>ABOUT</a>
-  </div>
+  <div class="navpill"><a id="navTest">TEST</a><a id="navRestart">RESTART</a><a>ABOUT</a></div>
   <div class="badge">5 / FOREST EDITION</div>
-</nav>
-
-<div class="app">
-
-  <!-- 인트로 -->
-  <section class="screen on" id="intro">
-    <div class="block-card sage hero reveal" id="hero">
-      <div class="floaty f1" id="fl1"></div>
-      <div class="floaty f2" id="fl2"></div>
-      <span class="label">BODY CHARACTER TEST · 2026</span>
-      <h1 class="disp" id="heroTitle"><span class="ln">내가 원하는</span><span class="ln">몸은?</span></h1>
-      <p class="sub">5개의 질문에 답하면, 당신이 꿈꾸는 몸을 가장 닮은 <b>캐릭터</b>와
-        성별·체중에 맞춘 <b>운동·식단 처방</b>까지 받아볼 수 있어요.</p>
-      <div class="gallery" id="gallery"></div>
-      <button class="btn block" onclick="goProfile()">시작하기 →</button>
-    </div>
-  </section>
-
-  <!-- 프로필 -->
-  <section class="screen" id="profile">
-    <div class="block-card olive reveal" id="profileCard">
-      <h2 class="ptitle disp">먼저, 당신은?</h2>
-      <p class="psub">성별과 몸무게를 알려주면 결과 처방을 더 정확하게 맞춰드려요.</p>
-      <div class="field">
-        <span class="label">성별 / Gender</span>
-        <div class="seg">
-          <button id="gM" onclick="setGender('남')">남성</button>
-          <button id="gF" onclick="setGender('여')">여성</button>
-        </div>
-      </div>
-      <div class="field">
-        <span class="label">몸무게 / Weight</span>
-        <div class="inp"><input id="wInput" type="number" inputmode="decimal" placeholder="예: 65" min="20" max="200"><span class="u">KG</span></div>
-      </div>
-      <button class="btn block" onclick="beginQuiz()">테스트 시작 →</button>
-      <p class="skip">입력 없이 시작해도 돼요 — 처방은 일반 기준으로 안내됩니다.</p>
-    </div>
-  </section>
-
-  <!-- 질문 -->
-  <section class="screen" id="quiz">
-    <div class="block-card olive reveal" id="quizCard">
-      <div class="qhead">
-        <div class="qnum disp"><span id="qnow">01</span><small> / 05</small></div>
-        <button class="back" onclick="back()">← 이전</button>
-      </div>
-      <div class="bar"><i id="barfill"></i></div>
-      <div class="qtext" id="qtext"></div>
-      <div id="opts"></div>
-    </div>
-  </section>
-
-  <!-- 결과 -->
-  <section class="screen" id="result">
-    <div class="block-card forest reveal" id="resultCard">
-      <div class="r-avatar" id="rAvatar"></div>
-      <div class="r-kicker" id="rKicker"></div>
-      <div class="r-name disp" id="rName"></div>
-      <div class="r-tags" id="rTags"></div>
-      <div class="r-block"><h4>Why this character / 왜 이 캐릭터일까</h4><p id="rReason"></p></div>
-      <div class="r-block"><h4>One line / 한 줄 설명</h4><p id="rDesc"></p></div>
-      <div class="r-block"><h4>Personalized / 너만을 위한 처방</h4><div class="plan" id="rPlan"></div></div>
-      <div class="r-block"><h4>Your scores / 나의 성향 점수</h4><div id="rScores"></div></div>
-      <div class="r-actions">
-        <button class="btn ghost" onclick="restart()">다시하기</button>
-        <button class="btn alt" onclick="restart()">친구에게 추천 🔗</button>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<footer><span class="label">— Earthy editorial · Forest &amp; Sage · Made with Claude Code</span></footer>
-
-<script>
-/* ===== SVG 캐릭터 아바타 (체형별 실루엣 + 상징) ===== */
-const SIL={
-  cap:{sw:32,ww:15,aw:9,fig:"#01472e",bg:"#ccd5ae",sym:"🛡️",line:true},
-  hulk:{sw:45,ww:28,aw:17,fig:"#244b30",bg:"#a3b18a",sym:"💪",line:true},
-  bruce:{sw:27,ww:12,aw:7,fig:"#3a2f0c",bg:"#e9c46a",sym:"🐉",line:true},
-  elsa:{sw:18,ww:12,aw:5,fig:"#235e72",bg:"#bcdce6",sym:"❄️",line:false},
-  pooh:{sw:25,ww:30,aw:11,fig:"#8a5a12",bg:"#e9b949",sym:"🍯",line:false}
-};
-function avatar(key,sym){
-  const p=SIL[key],cx=60;
-  const armL=`<rect x="${cx-p.sw-p.aw/2}" y="58" width="${p.aw}" height="62" rx="${p.aw/2}" fill="${p.fig}"/>`;
-  const armR=`<rect x="${cx+p.sw-p.aw/2}" y="58" width="${p.aw}" height="62" rx="${p.aw/2}" fill="${p.fig}"/>`;
-  const torso=`<path d="M ${cx-p.sw} 58 Q ${cx-p.sw} 51 60 49 Q ${cx+p.sw} 51 ${cx+p.sw} 58 L ${cx+p.ww} 130 Q 60 139 ${cx-p.ww} 130 Z" fill="${p.fig}"/>`;
-  const def=p.line?`<line x1="60" y1="68" x2="60" y2="120" stroke="${p.bg}" stroke-width="2.6" opacity="0.4"/><line x1="${cx-p.ww*0.55}" y1="92" x2="${cx+p.ww*0.55}" y2="92" stroke="${p.bg}" stroke-width="2.2" opacity="0.32"/>`:"";
-  const neck=`<rect x="53" y="46" width="14" height="11" fill="${p.fig}"/>`;
-  const head=`<circle cx="60" cy="34" r="15" fill="${p.fig}"/>`;
-  const badge=sym?`<circle cx="99" cy="108" r="17" fill="#fefae0"/><text x="99" y="115" font-size="19" text-anchor="middle">${p.sym}</text>`:"";
-  return `<svg viewBox="0 0 120 140" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="80" rx="56" ry="58" fill="${p.bg}" opacity="0.5"/>${armL}${armR}${torso}${def}${neck}${head}${badge}</svg>`;
-}
-
-/* ===== 결과 캐릭터 ===== */
